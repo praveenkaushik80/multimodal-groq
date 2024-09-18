@@ -47,8 +47,9 @@ with st.sidebar:
     else:
         # Set it as an environment variable
         os.environ["GROQ_API_KEY"] = groq_api_key
-        image_url = st.text_input("Enter Image URL")
-        if image_url:
-            ai_response = analyze_image(image_url)
-            st.image(image_url, use_column_width=True)
-            st.write("AI's Response:", ai_response)
+# Main section
+image_url = st.text_input("Enter Image URL")
+if image_url:
+    ai_response = analyze_image(image_url)
+    st.image(image_url, use_column_width=True)
+    st.write("AI's Response:", ai_response)
