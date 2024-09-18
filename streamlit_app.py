@@ -1,6 +1,7 @@
 import streamlit as st
 from groq import Groq
 import time
+import os
 
 # Function to analyze an image from a URL with retry mechanism
 def analyze_image(image_url, retries=3, delay=2):
@@ -33,7 +34,7 @@ def analyze_image(image_url, retries=3, delay=2):
             time.sleep(delay)  # Wait before retrying
 
 # Streamlit app
-st.title("Image Analyzer with AI")
+st.title("Image Analyzer with Groq")
 st.write("Enter an image URL to see what the AI thinks is in the image.")
 model_options = [
     "llava-v1.5-7b-4096-preview"
@@ -44,6 +45,8 @@ with st.sidebar:
     if not groq_api_key:
         st.info("Please add your Groq API key to continue.", icon="🗝️")
     else:
+        # Set it as an environment variable
+        os.environ["GROQ_API_KEY"] = groq_api_key
         image_url = st.text_input("Enter Image URL")
         if image_url:
             ai_response = analyze_image(image_url)
