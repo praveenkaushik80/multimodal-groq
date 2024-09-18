@@ -35,7 +35,7 @@ def analyze_image(image_url, retries=3, delay=2):
 
 # Streamlit app
 st.title("Image Analyzer with Groq")
-st.write("Enter an image URL to see what's is in the image.")
+st.write("Enter an image URL to describe the image.")
 model_options = [
     "llava-v1.5-7b-4096-preview"
 ]
