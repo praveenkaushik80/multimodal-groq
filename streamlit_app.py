@@ -45,7 +45,7 @@ def analyze_image_upload(image, retries=3, delay=2):
                         "role": "user",
                         "content": [
                             {"type": "text", "text": "What's in this image?"},
-                            {"type": "image_file", "image_file": {"url": image}},
+                            {"type": "image_file", "image_file": {"file": image}},
                         ]
                     }
                 ],
@@ -91,8 +91,8 @@ try:
             bytes_data = uploaded_file.getvalue()
             # Show the image filename and image.
             st.write(f'filename: {uploaded_file.name}')
-            ai_response = analyze_image_upload(uploaded_file)
-            st.image(uploaded_file, use_column_width=True)
+            ai_response = analyze_image_upload(bytes_data)
+            st.image(bytes_data, use_column_width=True)
             st.write("AI's Response:", ai_response)
 except Exception as e:
      st.error(f"API issue encountered: {e}.")
