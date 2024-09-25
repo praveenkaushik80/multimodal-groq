@@ -92,7 +92,7 @@ try:
         # If user attempts to upload a file.
     elif uploaded_file is not None:
         data = {}
-        with open(image_path, "rb") as img:
+        with open(uploaded_file, "rb") as img:
             image = base64.b64encode(img.read()).decode('latin1')
             data['ProcessedImage'] = image
         # Show the image filename and image.
