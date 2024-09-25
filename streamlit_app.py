@@ -93,7 +93,7 @@ try:
     elif uploaded_file is not None:
         # Show the image filename and image.
         st.write(f'filename: {uploaded_file.name}')
-        ai_response = analyze_image_upload(load_image(uploaded_file))
+        ai_response = analyze_image_upload(open_image(uploaded_file))
         st.image(open_image(uploaded_file), use_column_width=True)
         st.write("AI's Response:", ai_response)
 except Exception as e:
