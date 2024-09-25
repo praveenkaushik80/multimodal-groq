@@ -50,19 +50,18 @@ with st.sidebar:
 # Main section
 try:
     image_url = st.text_input("Enter Image URL")
+    # Initialize a streamlit file uploader widget.
+    uploaded_file = st.file_uploader("Choose a Image file")
     if image_url:
         ai_response = analyze_image(image_url)
         st.image(image_url, use_column_width=True)
         st.write("AI's Response:", ai_response)
-except:
-    # Initialize a streamlit file uploader widget.
-    uploaded_file = st.file_uploader("Choose a Image file")
-    # If user attempts to upload a file.
-    if uploaded_file is not None:
-        bytes_data = uploaded_file.getvalue()
-        # Show the image filename and image.
-        st.write(f'filename: {uploaded_file.name}')
-        ai_response = analyze_image(bytes_data)
-        st.image(bytes_data, use_column_width=True)
-        st.write("AI's Response:", ai_response)
+        # If user attempts to upload a file.
+    elif uploaded_file is not None:
+            bytes_data = uploaded_file.getvalue()
+            # Show the image filename and image.
+            st.write(f'filename: {uploaded_file.name}')
+            ai_response = analyze_image(bytes_data)
+            st.image(bytes_data, use_column_width=True)
+            st.write("AI's Response:", ai_response)
     
