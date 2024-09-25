@@ -1,7 +1,7 @@
 import streamlit as st
 from groq import Groq
 from PIL import Image
-from fastai import *
+from fastai import load_image
 import time
 import os
 
