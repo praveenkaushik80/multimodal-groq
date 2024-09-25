@@ -61,8 +61,8 @@ try:
             bytes_data = uploaded_file.getvalue()
             # Show the image filename and image.
             st.write(f'filename: {uploaded_file.name}')
-            ai_response = analyze_image(bytes_data)
-            st.image(bytes_data, use_column_width=True)
+            ai_response = analyze_image(uploaded_file)
+            st.image(uploaded_file, use_column_width=True)
             st.write("AI's Response:", ai_response)
 except Exception as e:
      st.error(f"API issue encountered: {e}.")
