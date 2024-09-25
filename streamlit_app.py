@@ -1,6 +1,8 @@
 import streamlit as st
 from groq import Groq
 from PIL import Image
+import json
+import base64
 import time
 import os
 
@@ -89,11 +91,14 @@ try:
         st.write("AI's Response:", ai_response)
         # If user attempts to upload a file.
     elif uploaded_file is not None:
-        image = Image.open(uploaded_file)
+        data = {}
+        with open(image_path, "rb") as img:
+            image = base64.b64encode(img.read()).decode('latin1')
+            data['ProcessedImage'] = image
         # Show the image filename and image.
         st.write(f'filename: {uploaded_file.name}')
-        ai_response = analyze_image_upload(image)
-        st.image(image, use_column_width=True)
+        ai_response = analyze_image_upload(json.dumps(data))
+        st.image(json.dumps(data), use_column_width=True)
         st.write("AI's Response:", ai_response)
 except Exception as e:
      st.error(f"API issue encountered: {e}.")
