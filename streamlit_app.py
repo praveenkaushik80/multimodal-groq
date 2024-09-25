@@ -1,5 +1,6 @@
 import streamlit as st
 from groq import Groq
+from PIL import Image
 import time
 import os
 
@@ -88,9 +89,7 @@ try:
         st.write("AI's Response:", ai_response)
         # If user attempts to upload a file.
     elif uploaded_file is not None:
-        with open(uploaded_file, "rb") as img:
-            image = base64.b64encode(img.read()).decode('latin1')
-        bytes_data = uploaded_file.getvalue()
+        image = Image.open(uploaded_file)
         # Show the image filename and image.
         st.write(f'filename: {uploaded_file.name}')
         ai_response = analyze_image_upload(image)
