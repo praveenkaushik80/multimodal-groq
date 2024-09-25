@@ -64,4 +64,6 @@ try:
             ai_response = analyze_image(bytes_data)
             st.image(bytes_data, use_column_width=True)
             st.write("AI's Response:", ai_response)
+ except Exception as e:
+     st.error(f"API issue encountered: {e}.")
     
