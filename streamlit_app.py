@@ -91,14 +91,10 @@ try:
         st.write("AI's Response:", ai_response)
         # If user attempts to upload a file.
     elif uploaded_file is not None:
-        data = {}
-        with open(uploaded_file, "rb") as img:
-            image = base64.b64encode(img.read()).decode('latin1')
-            data['ProcessedImage'] = image
         # Show the image filename and image.
         st.write(f'filename: {uploaded_file.name}')
-        ai_response = analyze_image_upload(json.dumps(data))
-        st.image(json.dumps(data), use_column_width=True)
+        ai_response = analyze_image_upload(open_image(uploaded_file))
+        st.image(open_image(uploaded_file), use_column_width=True)
         st.write("AI's Response:", ai_response)
 except Exception as e:
      st.error(f"API issue encountered: {e}.")
