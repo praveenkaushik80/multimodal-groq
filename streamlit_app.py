@@ -83,7 +83,7 @@ with st.sidebar:
 try:
     image_url = st.text_input("Enter Image URL")
     # Initialize a streamlit file uploader widget.
-    uploaded_file = st.file_uploader("Choose a Image file")
+    uploaded_file = st.file_uploader("Choose a Image file", type=['jpeg','jpg','png'])
     if image_url:
         ai_response = analyze_image(image_url)
         st.image(image_url, use_column_width=True)
@@ -93,7 +93,7 @@ try:
         # Show the image filename and image.
         st.write(f'filename: {uploaded_file.name}')
          # Read the image and encode it in base64
-        with open(uploaded_file.name, 'rb') as image_file:
+        with open(uploaded_file, 'rb') as image_file:
             encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
         ai_response = analyze_image_upload(encoded_image)
         st.image(encoded_image, use_column_width=True)
