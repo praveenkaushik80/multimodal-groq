@@ -5,6 +5,7 @@ import PIL
 import time
 import os
 from io import BytesIO
+import base64
 
 # Function to analyze an image from a URL with retry mechanism
 def analyze_image(image_url, retries=3, delay=2):
