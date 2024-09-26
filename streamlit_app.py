@@ -39,9 +39,15 @@ def analyze_image(image_url, retries=3, delay=2):
 
 # Streamlit app
 st.title("Image Analyzer with Groq")
+st.write(
+    "Type image url below and Groq will describe the image! "
+    "To use this app, you need to provide an Groq API key, which you can get [here](https://console.groq.com/keys). "
+)
 st.write("Enter an image URL to describe the image.")
 model_options = [
-    "llava-v1.5-7b-4096-preview"
+    "llava-v1.5-7b-4096-preview",
+    "llama-3.2-1b-preview",
+    "llama-3.2-3b-preview",
 ]
 with st.sidebar:
     selected_model = st.selectbox("Select any Groq Model", model_options)
