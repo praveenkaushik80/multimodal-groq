@@ -92,11 +92,8 @@ try:
     elif uploaded_file is not None:
         # Show the image filename and image.
         st.write(f'filename: {uploaded_file.name}')
-        file_path = os.path(uploaded_file)
-        prinnt('++++++++++++',file_path)
          # Read the image and encode it in base64
-        with open(file_path, 'rb') as image_file:
-            encoded_image = base64.b64encode(file_path.read()).decode('utf-8')
+        encoded_image = uploaded_file.read()
         ai_response = analyze_image_upload(encoded_image)
         st.image(encoded_image, use_column_width=True)
         st.write("AI's Response:", ai_response)
