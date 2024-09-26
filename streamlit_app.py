@@ -4,6 +4,7 @@ from PIL import Image
 import PIL
 import time
 import os
+from io import BytesIO
 
 # Function to analyze an image from a URL with retry mechanism
 def analyze_image(image_url, retries=3, delay=2):
@@ -94,7 +95,7 @@ try:
         st.write(f'filename: {uploaded_file.name}')
          # Read the image and encode it in base64
         encoded_image = uploaded_file.read()
-        ai_response = analyze_image_upload(encoded_image)
+        ai_response = analyze_image_upload(BytesIO(base64.b64decode(encoded_image))
         st.image(encoded_image, use_column_width=True)
         st.write("AI's Response:", ai_response)
 except Exception as e:
