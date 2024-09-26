@@ -66,16 +66,6 @@ try:
         ai_response = analyze_image(image_url)
         st.image(image_url, use_column_width=True)
         st.write("AI's Response:", ai_response)
-        # If user attempts to upload a file.
-    elif uploaded_file is not None:
-        # Show the image filename and image.
-        st.write(f'filename: {uploaded_file.name}')
-         # Read the image and encode it in base64
-        encoded_image = base64.b64encode(uploaded_file.read()).decode('utf-8')
-        # encoded_image = uploaded_file.read()
-        ai_response = analyze_image(uploaded_file.name)
-        st.image(uploaded_file, use_column_width=True)
-        st.write("AI's Response:", ai_response)
 except Exception as e:
      st.error(f"API issue encountered: {e}.")
     
