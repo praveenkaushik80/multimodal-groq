@@ -37,36 +37,6 @@ def analyze_image(image_url, retries=3, delay=2):
                 return f"Failed after {retries} attempts. Error: {e}"
             time.sleep(delay)  # Wait before retrying
 
-# Function to analyze an image from a URL with retry mechanism
-def analyze_image_upload(image, retries=3, delay=2):
-    for attempt in range(retries):
-        try:
-            client = Groq()
-            completion = client.chat.completions.create(
-                model="llava-v1.5-7b-4096-preview",
-                messages=[
-                    {
-                        "role": "user",
-                        "content": [
-                            {"type": "text", "text": "What's in this image?"},
-                            {"type": "image_file", "image_file": {"file": image}},
-                        ]
-                    }
-                ],
-                temperature=1,
-                max_tokens=1024,
-                top_p=1,
-                stream=False,
-                stop=None,
-            )
-            return completion.choices[0].message.content
-        except Exception as e:
-            if attempt < retries - 1:
-                st.error(f"API issue encountered: {e}. Retrying in {delay} seconds...")
-            else:
-                return f"Failed after {retries} attempts. Error: {e}"
-            time.sleep(delay)  # Wait before retrying
-
 # Streamlit app
 st.title("Image Analyzer with Groq")
 st.write("Enter an image URL to describe the image.")
@@ -97,8 +67,8 @@ try:
          # Read the image and encode it in base64
         encoded_image = base64.b64encode(uploaded_file.read()).decode('utf-8')
         # encoded_image = uploaded_file.read()
-        ai_response = analyze_image_upload(encoded_image)
-        st.image(encoded_image, use_column_width=True)
+        ai_response = analyze_image(uploaded_file.name)
+        st.image(uploaded_file, use_column_width=True)
         st.write("AI's Response:", ai_response)
 except Exception as e:
      st.error(f"API issue encountered: {e}.")
