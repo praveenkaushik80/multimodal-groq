@@ -92,8 +92,11 @@ try:
     elif uploaded_file is not None:
         # Show the image filename and image.
         st.write(f'filename: {uploaded_file.name}')
-        ai_response = analyze_image_upload(PIL.Image.open(uploaded_file).convert('RGB'))
-        st.image(PIL.Image.open(uploaded_file).convert('RGB'), use_column_width=True)
+         # Read the image and encode it in base64
+        with open(uploaded_file.name, 'rb') as image_file:
+            encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+        ai_response = analyze_image_upload(encoded_image)
+        st.image(encoded_image, use_column_width=True)
         st.write("AI's Response:", ai_response)
 except Exception as e:
      st.error(f"API issue encountered: {e}.")
