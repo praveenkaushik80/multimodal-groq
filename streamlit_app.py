@@ -60,8 +60,6 @@ with st.sidebar:
 # Main section
 try:
     image_url = st.text_input("Enter Image URL")
-    # Initialize a streamlit file uploader widget.
-    uploaded_file = st.file_uploader("Choose a Image file", type=['jpeg','jpg','png'])
     if image_url:
         ai_response = analyze_image(image_url)
         st.image(image_url, use_column_width=True)
