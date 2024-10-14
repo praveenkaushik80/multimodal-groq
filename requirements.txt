@@ -2,3 +2,4 @@ streamlit
 groq
 fastai
 distutils
+altair<5
